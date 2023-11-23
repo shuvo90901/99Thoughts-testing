@@ -25,3 +25,24 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 70px solid transparent; /* Change the value to adjust the size and direction */
+  border-right: 70px solid transparent; /* Change the value to adjust the size and direction */
+  border-bottom: 300px solid white; /* Change the color and size as desired */
+  position: relative;
+  bottom: 300px;
+}
+.triangle1 {
+  width: 0;
+  height: 0;
+  border-left: 280px solid white; /* Change the value to adjust the size and direction */
+  border-right: 70px solid transparent; /* Change the value to adjust the size and direction */
+  border-top: 300px solid white; /* Change the color and size as desired */
+  position: relative;
+  bottom: 300px;
+  z-index: 70;
+  border-top-right-radius: 12px;
+}
