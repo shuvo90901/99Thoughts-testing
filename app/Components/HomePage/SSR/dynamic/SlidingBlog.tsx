@@ -5,7 +5,8 @@ import SlidingBlogSlider from "../../CSR/SlidingBlog/SlidingBlogSlider";
 import { Suspense } from "react";
 
 const SlidingBlog = async () => {
-  const blogsData = await getCategoryBlogs();
+  const BlogLimit = 16;
+  const blogsData = await getCategoryBlogs("tech_and_software", BlogLimit);
 
   const { newBlogsArr } = await blogsData;
 

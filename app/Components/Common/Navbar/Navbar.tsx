@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { lazy, Suspense } from "react";
 import LogoCompo from "./LogoCompo";
+import getCategoryName from "@/lib/Dynamodb/getCategoryName";
 
 const CgArrowsV = lazy(() =>
   import("react-icons/cg").then((module) => ({ default: module.CgArrowsV }))
@@ -10,7 +11,14 @@ const CgDetailsMore = lazy(() =>
   import("react-icons/cg").then((module) => ({ default: module.CgDetailsMore }))
 );
 
-const Navbar = () => {
+interface Category {
+  Id: string;
+  CategoryName: string;
+}
+
+const Navbar = async () => {
+  const Categories: Promise<any> = await getCategoryName();
+  const Category = await Categories;
   return (
     <div>
       <div className="navbar bg-transparent fixed top-0 z-50 backdrop-filter backdrop-blur-sm text-[#ced2d8] text-[16px]">
@@ -94,36 +102,13 @@ const Navbar = () => {
                     tabIndex={0}
                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[30vw]  absolute left-[-180px] top-[35px] grid grid-cols-2"
                   >
-                    <li className="mx-auto">
-                      <span>Item 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Item 2</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Item 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Item 2</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Item 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Item 2</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Item 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Item 2</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Item 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Item 2</span>
-                    </li>
+                    {Category?.map((data: Category) => (
+                      <li key={data?.Id} className="mx-auto">
+                        <Link href={`/blogs/${data?.CategoryName}`}>
+                          {data?.CategoryName}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </li>
@@ -140,36 +125,13 @@ const Navbar = () => {
                     tabIndex={1}
                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[30vw]  absolute left-[-180px] top-[35px] grid grid-cols-2"
                   >
-                    <li className="mx-auto">
-                      <span>Items 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Items 2</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Items 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Items 2</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Items 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Items 2</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Items 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Items 2</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Items 1</span>
-                    </li>
-                    <li className="mx-auto">
-                      <span>Items 2</span>
-                    </li>
+                    {Category?.map((data: Category) => (
+                      <li key={data?.Id} className="mx-auto">
+                        {/* <Link href={`/qna/${data?.CategoryName}`}> */}
+                        {data?.CategoryName}
+                        {/* </Link> */}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </li>

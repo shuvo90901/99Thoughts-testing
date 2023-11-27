@@ -1,8 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   images: {
-    domains: ["www.99thoughts.com"],
+    remotePatterns: [
+      {
+        hostname: "www.99thoughts.com",
+        protocol: "https",
+      },
+      // Add more entries if needed
+    ],
   },
 };
-
-module.exports = nextConfig;

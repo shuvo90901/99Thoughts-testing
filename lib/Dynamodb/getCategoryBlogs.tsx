@@ -2,9 +2,12 @@
 
 const BASE_URL = `https://www.99thoughts.com`;
 
-export default async function getCategoryBlogs() {
+export default async function getCategoryBlogs(
+  category: string,
+  BlogLimit: number
+) {
   const res = await fetch(
-    "https://www.api.99thoughts.com/handleGetCategoryBlogs?category=tech_and_software",
+    `https://www.api.99thoughts.com/handleGetCategoryBlogs?category=${category}&BlogLimit=${BlogLimit}`,
     { next: { revalidate: 60 } }
   );
   const data = await res.json();
@@ -43,6 +46,7 @@ export default async function getCategoryBlogs() {
   const EvalutedKey = {
     BlogId: data?.LastEvaluatedKey?.BlogId?.S,
     publishedDate: data?.LastEvaluatedKey?.publishedDate?.S,
+    CategoryName: data?.LastEvaluatedKey?.CategoryName?.S,
   };
   return { newBlogsArr, EvalutedKey };
 }
